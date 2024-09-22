@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { menu_list } from "../assets/assets";
 import { useDispatch, useSelector } from "react-redux";
 
 const Filter = ({
