@@ -173,7 +173,7 @@ useEffect(()=>{
     try {
       // console.log(formData);
       const response = await axios.post(
-        `http://localhost:4000/api/product/add`,
+        `${API_URL}/api/product/add`,
         payload
       );
       // console.log(response);

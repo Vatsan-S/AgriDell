@@ -53,7 +53,7 @@ const Order = () => {
     // createOrder(total)
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/orders/placeOrder",
+        "https://agridell.onrender.com/api/orders/placeOrder",
         {
           total,
           currency: "INR",
