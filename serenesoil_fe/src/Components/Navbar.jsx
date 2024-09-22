@@ -62,9 +62,7 @@ const Navbar = ({ setShowLogin }) => {
         </Link>
       </ul>
       <div className="navbar_right">
-        <div className="searchIcon">
-          <IoSearch />
-        </div>
+        
         <Link to="/cart" className="navbar_cart_icon">
           <FaShoppingCart />
           <div className={count === 0 ? "" : "dot"}></div>
