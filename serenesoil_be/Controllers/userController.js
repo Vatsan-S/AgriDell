@@ -1,9 +1,9 @@
 import User from "../models/userModal.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import dotenv from 'dotenv'
+import dotenv from "dotenv";
 
-dotenv.config()
+dotenv.config();
 
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
@@ -34,70 +34,81 @@ export const register = async (req, res) => {
       email: email,
       password: hashPassword,
     });
-    const user = await newUser.save()
-    const token = jwt.sign({id:user._id}, process.env.JWT_SECRET_KEY)
-    console.log(token)
-    res.status(200).json({message:"User Registered", token: token})
+    const user = await newUser.save();
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY);
+    console.log(token);
+    res.status(200).json({ message: "User Registered", token: token });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res
       .status(500)
-      .json({ message: "Internal server error in registering User", error: error });
+      .json({
+        message: "Internal server error in registering User",
+        error: error,
+      });
   }
 };
 
 export const login = async (req, res) => {
-    const {email, password} = req.body
+  const { email, password } = req.body;
   try {
     // validation is a registerd User?
-    const existingUser = await User.findOne({email:email})
-    if(!existingUser){
-        return res.status(404).json({message:"No user found"})
+    const existingUser = await User.findOne({ email: email });
+    if (!existingUser) {
+      return res.status(404).json({ message: "No user found" });
     }
 
     // password verification
-    const passMatch = await bcrypt.compare(password, existingUser.password)
-    if(!passMatch){
-        return res.status(400).json({message:"Invalid Credentials"})
+    const passMatch = await bcrypt.compare(password, existingUser.password);
+    if (!passMatch) {
+      return res.status(400).json({ message: "Invalid Credentials" });
     }
 
-    const token = jwt.sign({id:existingUser._id}, process.env.JWT_SECRET_KEY)
-    res.status(200).json({message:"Login Successfull", token: token})
+    const token = jwt.sign(
+      { id: existingUser._id },
+      process.env.JWT_SECRET_KEY
+    );
+    res.status(200).json({ message: "Login Successfull", token: token });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res
       .status(500)
-      .json({ message: "Internal server error in logging In user", error:error });
+      .json({
+        message: "Internal server error in logging In user",
+        error: error,
+      });
   }
 };
 
-
-export const getUser = async(req,res)=>{
-  const {userID} = req.body
+export const getUser = async (req, res) => {
+  const { userID } = req.body;
   try {
-    const user = await User.findById(userID)
-    if(!user){
-      return res.status(404).json({message:"No user found"})
+    const user = await User.findById(userID);
+    if (!user) {
+      return res.status(404).json({ message: "No user found" });
     }
-    res.status(200).json({message:"User Data", user: user})
+    res.status(200).json({ message: "User Data", user: user });
   } catch (error) {
-    res.status(500).json({message:"Internal server error in getting User"})
+    res.status(500).json({ message: "Internal server error in getting User" });
   }
-}
+};
 
-export const loginAdmin = (req,res)=>{
-  const {username, password} = req.body
+export const loginAdmin = (req, res) => {
+  const { username, password } = req.body;
   try {
-    const adminUsername = process.env.adminUsername
-    const adminPassword = process.env.adminPASS
-
-    if(username != adminUsername || password != adminPassword){
-      return res.status(400).json({message:"Invalid Credentials"})
+    const adminUsername = process.env.adminUsername;
+    const adminPassword = process.env.adminPASS;
+    console.log(adminPassword, adminUsername);
+    console.log(password, username)
+    if (username != adminUsername || password != adminPassword) {
+      return res.status(400).json({ message: "Invalid Credentials" });
     }
 
-    const token = jwt.sign({id:username}, process.env.JWT_SECRET_KEY)
-    res.status(200).json({message:"Login Successfull", token: token})
+    const token = jwt.sign({ id: username }, process.env.JWT_SECRET_KEY);
+    res.status(200).json({ message: "Login Successfull", token: token });
   } catch (error) {
-    res.status(500).json({message:"Internal server error in logging in admin"})
+    res
+      .status(500)
+      .json({ message: "Internal server error in logging in admin" });
   }
-}
+};
