@@ -96,10 +96,10 @@ export const getUser = async (req, res) => {
 export const loginAdmin = (req, res) => {
   const { username, password } = req.body;
   try {
-    const adminUsername = process.env.adminUsername;
+    const adminUsername = process.env.adminUSERNAME;
     const adminPassword = process.env.adminPASS;
-    console.log(adminPassword, adminUsername);
-    console.log(password, username)
+    console.log("env",adminPassword, adminUsername);
+    console.log("user",password, username)
     if (username != adminUsername || password != adminPassword) {
       return res.status(400).json({ message: "Invalid Credentials" });
     }
