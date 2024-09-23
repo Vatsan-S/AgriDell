@@ -1,6 +1,4 @@
-Here's a GitHub README.md format for your Serene Soil project, styled for clarity and professionalism:
 
----
 
 # 🌿 Serene Soil
 
@@ -50,6 +48,3 @@ Here's a GitHub README.md format for your Serene Soil project, styled for clarit
 - **Username:** `admin123`
 - **Password:** `admin@pass`
 
----
-
-Feel free to use this as your README.md file. It’s formatted to be clear and comprehensive, providing a quick overview of your project while giving users and developers the essential details they need.
