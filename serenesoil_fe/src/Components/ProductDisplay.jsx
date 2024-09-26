@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "./ProductCard";
 import { fetchProductList } from "../Redux/Slice/dataSlice";
 
-const ProductDisplay = ({ refinedList }) => {
+const ProductDisplay = ({ refinedList, setIsModalOpen, setCardData }) => {
   // ---------------------------------get user Data-------------------
   const token = localStorage.getItem("authToken");
   // console.log('token', token)
@@ -13,7 +13,9 @@ const ProductDisplay = ({ refinedList }) => {
 
   useEffect(() => {
     dispatch(fetchProductList());
-  }, []); 
+  }, []);
+
+  // ----------------------------handle Modal--------------------------
 
   return (
     <div className="productDisplay" id="productDisplay">
@@ -21,9 +23,11 @@ const ProductDisplay = ({ refinedList }) => {
 
       <div className="productDisplayList">
         {refinedList.map((ele, index) => {
-          return <ProductCard key={index} data={ele} token={token} />;
+          return <ProductCard key={index} data={ele} token={token} setCardData={setCardData} setIsModalOpen={setIsModalOpen} />;
         })}
       </div>
+
+
     </div>
   );
 };

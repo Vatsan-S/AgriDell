@@ -177,6 +177,12 @@ background: var(--clr-text-dark);
 color: var(--clr-surface-light);
 }
 /* --------------------------home page------------------- */
+.NoData{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+}
 .header {
   height: 35vw;
   margin: 25px auto;
@@ -220,6 +226,27 @@ color: var(--clr-surface-light);
   font-size: max(1vw, 13px);
 }
 
+
+.modalBG{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalCard{
+  width: 400px;
+  height: auto;
+  max-height: 70vh;
+  background-color: white;
+  border-radius: 16px;
+
+}
 /* -----------------------filter section-------------------- */
 .exploreMenu {
   display: flex;
